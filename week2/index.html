@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Week 2 Notes and exercises</h1>
+
+    <ul>
+        <h2>Chapter 2 Reading notes</h2>
+        <li>Comments, JS Grammar, Reserved Words, Primitive Data Types - Review</li>
+        <li>If you create a new variable inside a scope, without using 'let', 
+            or 'const', that variable will be accessible from outside the block.</li>
+        <li>
+            <h3>Naming variables</h3>
+            <ul>
+                <li>
+                    Variables that start with an underscore generally refer to private properties and
+                    methods
+                </li>
+                <li>Camel case : firstNameAndLastName</li>
+                <li>Underscore : first_name_and_last_name</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Direct Assignment and Assignment By Reference</h3>
+            <p>
+                Direct Assignment is when you assign a primitive value to a variable.
+            </p>
+            <p>
+                Assignment by reference is done when you assign a non-primitive value to a variable.
+            </p>
+            <p>
+                Real example from book:
+                <pre>const c = { value: 1};
+let d = c;
+d.value = 2;
+
+document.querySelector('[data-example1]').innerHTML = c.value;
+                </pre>
+                c.value is equal to:
+                <span style="color: red;" data-example1></span>
+            </p>
+        </li>
+        <li>
+            <h3>Properties and Methods</h3>
+            <quote>
+                Technically, only objects have properties and methods. JavaScript overcomes
+                this by creating wrapper objects for primitive data types. This all happens in the
+                background, so for all intents and purposes it appears that primitive data types
+                also have properties and methods.
+            </quote>
+            <p>Primitives values have built-in methods in it.</p>
+        </li>
+        <li>
+            <h3>Template Literals
+            </h3>
+            Review
+        </li>
+        <li>
+            <h3>Symbols</h3>
+            <p>
+                Create it using: const uniqueID = Symbol();
+                It is recommended to add a description of the symbol inside the parentheses:
+            </p>
+            <p>
+                The main use-case for symbols is as object property keys, which will be covered
+                in Chapter 5. The uniqueness of symbols, mean that it’s impossible for the
+                names of any properties to clash with each other if they are symbols.
+            </p>
+        </li>
+        <li>
+            <h3>Octal and Hexadecimal Numbers</h3>
+            <ul>
+                <li>
+                    If a number starts with a 0x, it is considered to be in hexadecimal (base 16)
+                    notation:
+                    0xAF; // A represents 10, F represents 15
+                </li>
+                <li>ES6 now supports octal literals: If a number starts with a zero, followed by the
+                    letter o, then it is considered to be in octal (base 8) notation:
+                    0o47; // 4 eights and 7 units
+                </li>
+                <li>
+                    ES6 also supports binary literals: If a number starts with a zero, followed by the
+                    letter b then it is considered to be in binary (base 2) notation:
+                    0b1010; // 1 eight, 0 fours, 1 two and 0 units
+                </li>
+                <li>
+                    <h3>Exponential Notation
+                    </h3>
+                    Numbers can also be represented in exponential notation, which is shorthand for
+                    "multiply by 10 to the power of" (you may have heard this referred to as
+                    "scientific notation" or "standard form"). Here are some examples:
+                    <p>
+                        1e6; // means 1 multiplied by 10 to the power 6 (a million)
+                        2E3; // 2 multiplied by 10^3 (two thousand)
+                    </p>
+                </li>
+                <li>
+                    <h3>Infinite Example:</h3>
+                    <p data-example2 style="color: red;"></p>
+                </li>
+                <li>
+                    <h3>Converting Strings to Numbers</h3>
+                    <p>
+                        The best way to change a string to a number is to use the Number method. This
+                        will convert the string form of a number into an actual number:
+                    </p>
+                    <p>
+                        Number('23');
+                    </p>
+                    <p>
+                        There are a few 'tricks' that can also be used to convert a string into a number
+                        that use type coercion. For example we can multiply a numerical string by 1,
+                        which will coerce it into a number:
+                        const answer = '5' * 1;
+                    </p>
+                </li>
+                <li>
+                    <h3>Converting Numbers to Strings</h3>
+                    <p>
+                        The preferred way of changing a number to a string is to use the String
+                        function:
+                        String(3);
+                    </p>
+                </li>
+                <li>
+                    <h3>Parsing Numbers</h3>
+                    <p>
+                        There is also a useful function called parseInt() that can be used to convert a
+                        string representation of a numerical value back into a number. You can specify
+                        the base of the number you are trying to convert, for example:
+                        parseInt('1010',2); // converts from binary, back to decimal
+                    </p>
+                </li>
+                <li>
+                    <h3>
+                        Null and undefined
+                    </h3>
+                    <p>
+                        Null means 'no value'. It can be thought of as a placeholder that JavaScript uses
+                        to say "there should be a value here, but there isn’t at the moment."
+                        If this reminds you a lot of undefined then this is because they are both 'nonvalue' values, meaning they are similar, but behave slightly differently. For
+                        example, if you try to do sums with them:
+                        10 + null; // null behaves like zero
+                        << 10
+                        10 + undefined; // undefined is not a number
+                        << NaN
+                    </p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul>
+        <h2>Chapter 3 notes</h2>
+        <li>
+            <h3>Arrays are not primitive values, they are object.</h3>
+            <p>
+                typeof []
+                << 'object'
+            </p>
+        </li>
+        <li>
+            <h3>Removing Values from Arrays</h3>
+            <p>
+                delete avengers[3];
+                << ['Captain America', 'Iron Man', 'Thor', undefined]
+                delete will delete the value, not the reserved space.
+            </p>
+        </li>
+        <li>
+            <h3>
+                Destructuring Arrays
+            </h3>
+            <p>
+                const [x,y] = [1,2];
+
+                Swap values:    [x,y] = [y,x];
+            </p>
+        </li>
+        <li>
+            <h3>The join() Method</h3>
+            <p>
+                The join() method can be used to turn the array into a string that comprises all
+                the items in the array, separated by commas:
+            </p>
+            <h3>The reverse() method</h3>
+            <p>
+                We can reverse the order of an array using the reverse() method
+            </p>
+            <h3>The sort() method</h3>
+            <p>
+                We can sort the order of an array using the sort() method
+            </p>
+        </li>
+        <li>
+            <h3>Finding if a Value is in an Array</h3>
+            <p>
+                We can find out if an array contains a particular value using the indexOf()
+                method to find the first occurrence of a value in an array. If the item is in the
+                array, it will return the index of the first occurrence of that item:
+                avengers.indexOf('Iron Man');
+
+                If the item is not in the array, it will return -1:
+                avengers.indexOf('Thor');
+
+                ES6 also introduced the includes() method. This returns a boolean value
+                depending on whether the array contains a particular element or not:
+                avengers.includes('Iron Man');
+
+                You can also add an extra parameter to indicate which index to start the search
+                from:
+                avengers.includes('Black Widow', 1);
+            </p>
+        </li>
+        <li>
+            <h3>Sets</h3>
+            <p>
+                Creating Sets
+                An empty set is created using the new operator and Set() constructor:
+                const list = new Set();
+            </p>
+            <p>
+                Values can be placed into a set using the add method:
+                list.add(1);
+            </p>
+            <p>
+                Multiple items can be added to the set by repeating the add() method:
+                list.add(2).add(3).add(4);
+                << Set { 1, 2, 3, 4 }
+            </p>
+            <p>
+                If any values are repeated in the array, then they will only appear once in the set:
+                const moreNumbers = new Set([7,7,7,7,7,8,8,8,9,9]);
+                moreNumbers
+                << Set {7,8,9}
+                This gives a convenient way of eliminating any duplicate values from an array in
+                a single operation.
+                If a string is used as the argument then each character will be added as a separate
+                element, with any repeated characters ignored:
+                const letters = new Set('hello');
+                letters
+                << Set { 'h', 'e', 'l', 'o' }
+                If you want to add separate words, you need to use the add() method:
+                const words = new Set().add('the').add('quick').add('brown').add('fox')
+                words
+                << Set { 'the', 'quick', 'brown', 'fox' }
+                All non-primitive values, such as arrays and objects, are considered unique
+                values, even if they contain the same values. On the face of it, this appears to
+                allow duplicate values appear in a set:
+                const arrays = new Set().add([1]).add([1]);
+                arrays
+                << Set { [ 1 ], [ 1 ] }
+                The two arrays may look the same, but are considered different objects. This can
+                be seen with the following strict equality test:
+                [1] === [1];
+                << false
+                Type coercion is not used when values are added to a set, so the string '2' will be
+                added as a new entry, even if the number 2 is already an element of the set:
+                const mixedTypes = new Set().add(2).add('2');
+                mixedTypes
+                << Set { 2, '2' }
+            </p>
+        </li>
+        <li>
+            <h3>Maps</h3>
+            <p>
+                Objects are limited to using strings for key values, whereas maps can use
+                any data type as a key.
+                There is no efficient way to find the number of key-value pairs an object
+                has, whereas this is easy to do with maps using the size property.
+                Objects have methods that can be called (see Chapter 5) and prototypes that
+                can be used to create a chain of inheritance (see Chapter 12), whereas maps
+                are solely focused on the storage and retrieval of key-value pairs.
+                The value of an object's properties can be accessed directly, whereas maps
+                restrict you to using the get() method to retrieve any values.
+
+                An empty map object can be created using the new operator and Map()
+                constructor:
+                const romanNumerals = new Map();
+
+                romanNumerals.set(2,'II').set(3,'III').set(4,'IV').set(5,'V');
+                << Map { 1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V' }
+            </p>
+        </li>
+    </ul>
+    <ul>
+        <h2>Chapter 3</h2>
+        <li>
+            <h3>Converting arguments in array</h3>
+            <p>
+                function rest(...args){
+                    return args;
+                }                    
+            </p>
+        </li>
+        <li>
+            <h3>Function Hoisting</h3>
+            <p>
+                Hoisting is the JavaScript interpreter’s action of moving all variable and function
+                declarations to the top of the current scope, regardless of where they are defined.
+                Functions that are defined using a function declaration are automatically hoisted,
+                meaning they can be invoked before they have been defined. For example, in the
+                following code the function hoist() can be invoked before it is actually defined:
+                // function is invoked at the start of the code
+                hoist();
+                // ...
+                // ... lots more code here
+                // ...
+                // function definition is at the end of the code
+                function hoist(){
+                    console.log('Hoist Me!');
+                }
+            </p>
+        </li>
+        <li>Callbacks</li>
+        <h3>Callback functions</h3>
+        <p>
+            But What if the Function Isn't Provided as an Agrument?
+            There is nothing to actually define a parameter as a callback, so if a function isn't
+            provided as an argument, then this code won't work. It is possible to check if an
+            argument is a function using the following code:
+            if(typeof(callback) === 'function'){
+            callback();
+            }
+            This will only attempt to invoke the callback if it is a function
+        </p>
+        <p>
+            Now we can create another function called dance() that can be used as the
+            callback:
+            function dance() {
+            console.log("I'm moving my body to the groove.");
+            }
+            Now we can call our sing function, but we can also dance as well as sing:
+            sing('Let It Go',dance);
+            << 'I'm singing along to Let It Go.'
+            'I'm moving my body to the groove.'
+        </p>
+        <li>
+            <h3>Sort using callbacks</h3>
+            <p>
+                function numerically(a,b){
+                    return a-b;
+                }
+                This simply subtracts the two numbers that are being compared, giving a result
+                that is either negative (if b is bigger than a), zero (if a and b are the same value),
+                or positive (if a is bigger than b).
+                This function can now be used as a callback in the sort() method to sort the
+                array of numbers correctly:
+                > [1,3,12,5,23,18,7].sort(numerically);
+                << [1, 3, 5, 7, 12, 18, 23]
+                    
+            </p>
+        </li>
+    </ul>
+</body>
+<script src="./main.js"></script>
+</html>

@@ -1,13 +1,13 @@
-const links = [
-    {
-        label: "Week1 notes",
-        url: "week1/index.html"
-    }
-]
+
+
+const links = [ 1, 2 ]
 
 for (link in links) {
+
+
+
     document.querySelector('body ol').innerHTML += `
         <li>
-            <a href='${links[link].url}'>${links[link].label}</a>
+            <a href='week${parseInt(link) + 1}/index.html'>Week ${parseInt(link) + 1} Report</a>
         </li>`;
 }
