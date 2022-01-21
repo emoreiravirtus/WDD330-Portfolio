@@ -1,0 +1,216 @@
+<h1>Week 3 Notes</h1>
+
+<h2>"This"</h2>
+<ul>
+    <li>this is evaluated at call-time.</li>
+    <li>Arrow functions don't have their own this, they will access this from outside.</li>
+    <li>Functions that are stored in object properties are called “methods”.</li>
+</ul>
+<p>"this" inside some function refers to the context the function is on</p>
+<pre>
+Example:
+let user = { name: "Jhon" };
+
+function sayHi() {
+    alert( this.name );
+}
+
+user.f = sayHi;
+
+user.f(); <i>// John (this == user)</i>
+</pre>
+<br>
+<p>"this" in a strict mode:</p>
+<pre>
+function sayHi() {
+    alert(this);
+}
+    
+sayHi(); <i>// undefined</i>
+</pre>
+<br>
+<p>"this" in a non-strict mode will return a global object (window in a browser)</p>
+
+<h2>Chapter 5: Objects</h2>
+Everything in JavaScript is either one of the six primitive data types we met in
+Chapter 2 (strings, numbers, booleans, symbols, undefined, and null) or an
+object. We’ve actually met some objects already; arrays in Chapter 3 and
+functions in Chapter 4 are both objects, although these are built-in objects that
+are part of the language. In this chapter we’re going to look at user-defined
+objects, as well as some of the other built-in objects.
+
+In this chapter, we'll cover the following topics:
+<ul>
+    <li>
+        Object literals
+
+        An object in JavaScript is a self-contained set of related values and functions.
+        They act as a collection of named properties that map to any JavaScript value
+        such as strings, numbers, booleans, arrays and functions. If a property’s value is
+        a function, it is known as a method.
+
+        The in operator can be used to check whether an object has a particular property.
+        So, for example, we can check if the superman object has a property called city
+        using this code:
+
+        'city' in superman;
+    </li>
+    <li>
+        Adding properties to objects'
+
+        New properties and methods can be added to objects at any time in a program.
+        This is done by simply assigning a value to the new property. For example, if we
+        wanted to add a new city property to our superman object, we would do it like
+        so:
+
+        superman.city = 'Metropolis';
+        << 'Metropolis'
+
+        Objects Are Copied By Reference
+    </li>
+    <li>
+        JSON
+        The parse() method takes a string of data in JSON format and returns a
+        JavaScript object
+
+        The stringify() method does the opposite, taking a JavaScript object and
+        returning a string of JSON data
+    </li>
+    <li>
+        The Math object
+
+        The Math object is a built-in object that has several properties representing
+        mathematical constants, as well as methods that carry out a number of common
+        mathematical operations.
+        The Math object has eight properties that represent a mix of commonly used
+        math constants
+
+        The Math.ceil() method will round a number up to the next integer, or remain
+        the same if it is already an integer
+
+        The Math.floor() method will round a number down to the next integer, or
+        remain the same if it is already an integer
+
+        The Math.round() method will round a number to the nearest integer
+
+        ES6 also introduced the Math.trunc() method that returns the integer-part of a
+        number – that is, it gets truncated at the decimal point
+
+        The Math.cbrt() method was introduced in ES6, which returns the cube root of
+        numbers
+    </li>
+    <li>
+        The Date object
+
+        Date objects contain information about dates and times. Each object represents a
+        single moment in time.
+    </li>
+    <li>
+        The RegExp object
+        A regular expression (or RegExp, for short) is a pattern that can be used to
+        search strings for matches to the pattern. A common use is 'find and replace' type
+        operations. For example, say you were looking for any word ending in 'ing', you
+        could use the regular expression /[a-zA-Z]+ing$/.
+    </li>
+    <li>
+        Project ― we'll create quiz and question objects and ask random questions
+    </li>
+</ul>
+<br>
+<h2>Chapter 6: DOM</h2>
+<p>
+    The DOM provides several methods that allow us to access any element on a
+    page. These methods will return a node object or a node list, which is an array like object. These objects can then be assigned to a variable and be inspected or
+    modified.
+</p>
+<i>Rest of chapter was just revision</i>
+<br>
+<h2>Chapter 7: Events</h2>
+<p>
+    We saw in the last chapter how the DOM is an interface that allows you to use
+    JavaScript to interact with a web page. Events are another part of the DOM and
+    they are what provides the link between the web page and user interactions.
+    Every time a user interacts with a web page, such as clicking on a link, pressing
+    a key, or moving a mouse, an event occurs that our program can detect and then
+    respond to.
+</p>
+<p>
+    The recommended way of dealing with events, and the current standard, is to use
+event listeners
+</p>
+<p>event object was revision.</p>
+<h3>Touch events -for mobile</h3>
+<pre>
+    Touch Events
+Many modern devices now support touch events. These are used on smartphones
+and tablets, as well as touch-screen monitors, satellite navigators and trackpads.
+Touch events are usually made with a finger, but can also be by stylus or another
+part of the body. There are a number of touch events that cover many types of
+touch interactions.
+It’s important to support mouse events as well as touch events, so non-touch
+devices are also supported. With so many different devices these days, you can’t
+rely on users using just touch or a mouse. In fact, some devices, such as
+touchscreen laptops, support both mouse and touch interactions.
+The touchstart event occurs when a user initially touches the surface.
+Using the touchstart Event
+Be careful when using the touchstart event as it fires as soon as a user touches
+the screen. They may be touching the screen because they want to zoom in or
+swipe, and a touchstart event listener could prevent them from doing this.
+The click event is often a much safer option as it still fires when the screen is
+touched, but there’s a slight delay of 300ms, allowing the user time to perform
+another action with the device. The click event can be thought of as a "tap" in
+the context of a touch event.
+The touchend event occurs when a user stops touching the surface:
+addEventListener('touchend', () => console.log('Touch stopped');
+The touchmove event occurs after a user has touched the screen then moves
+around without leaving. It will continue to occur as long as the user is still
+touching the screen, even if they leave the element to which the event listener is
+attached.
+The touchenter event occurs when a user has already started touching the
+surface, but then passes over the element to which the event listener is attached.
+The touchleave event occurs when the user is still touching the surface, but
+leaves the element to which the event listener is attached.
+The touchcancel event occurs when a touch event is interrupted, such as a
+user’s finger moving outside the document window, or too many fingers being
+used at once. A pop-up dialog will also cancel a touch event.
+What About Swiping?
+There are no 'swipe' events. These need to be created by using a combination of
+touchstart, touchmove, and touchleave events that monitor the distance and
+direction moved from start to finish of a touch event.
+There were proposals for gesture events that may be supported in the future, but
+it seems they are not scheduled to be part of the specification anytime soon.
+</pre>
+<br>
+<h3>Touch simultaneously</h3>
+<pre>
+    Because it’s possible to touch a surface many times at once, touch event objects
+    have a property called touches. This is a list of touch objects that represents all
+    the touches taking place on that device. It has a length property that tells you
+    how many touch points (usually the user's fingers, but could be a stylus) are in
+    contact with the surface. Each touch object in the list can be accessed using
+    index notation. For example, if a user touches the screen with two fingers,
+    events.touches.length would return 2. The first touch object can be accessed
+    using events.touches[0] and the second using events.touches[1].
+    Each touch object has a number of properties, many similar to the event object,
+    such as touch.screenX and touch.screenY to find the coordinates of the touch
+    point. They have other properties such as touch.radiusX and touch.radiusY,
+    which give an indication of the area covered by the touch, and touch.force,
+    which returns the amount of pressure being applied by the touch as a value
+    between 0 and 1.
+    Each touch object has a touch.identifier property, a unique ID that can be
+    used to ensure you are dealing with the same touch.
+    Use Touch Events With Caution
+    Touch events are complex and difficult to implement. Many of the properties and
+    methods mentioned above are still marked as being experimental and not widely
+    implemented in browsers.
+    Removing Event Listener
+</pre>
+<h3>Bubbling and Capturing</h3>
+<pre>
+    Bubbling is when the event fires on the element clicked on first, then bubbles up
+the document tree, firing an event on each parent element until it reaches the root
+node.
+Capturing starts by firing an event on the root element, then propagates
+downwards, firing an event on each child element until it reaches the target
+element that was clicked on.
+</pre>
