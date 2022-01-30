@@ -1,0 +1,306 @@
+<div>
+    <h1>Week 4 Notes</h1>
+
+    <ul>
+        <li>
+            <h2>Forms</h2>
+            <ul>
+                <li>
+                    I didn't knew there was a reset button in a form
+                    <pre>
+                        Reset buttons are generally considered poor for usability, as they are too easy to
+                        click and then wipe out all the data that’s been entered. So think very carefully
+                        before using one in a form
+                    </pre>
+                </li>
+                <li>
+                    Reset buttons are generally considered poor for usability, as they are too easy to
+                    click and then wipe out all the data that’s been entered. So think very carefully
+                    before using one in a form
+                </li>
+                <li>
+                    Hidden fields can be created using input fields with type='hidden'. These are
+                    not displayed by the browser, but have a 'value' attribute that can contain
+                    information that is submitted with the form. They are often used to send
+                    information such as settings or information that the user has already provided.
+                    Note that the information in these fields is in no way secret, as it’s visible in the
+                    HTML, so shouldn’t be used for sensitive data. The value of a hidden input field
+                    can be changed using JavaScript in the same was as any other input field.
+                </li>
+                <li>
+                    File Input Fields
+                    A file input field can be created using input fields with type='file'. These are
+                    used to upload files, and most browsers will provide a browse button or similar
+                    that lets users select a file from their file system.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>Object-Oriented Programming in JavaScript</h2>
+            <ul>
+                <li>
+                    Object-oriented programming is often used to model representations of objects
+                    in the real world. There are three main concepts in OOP: encapsulation,
+                    polymorphism and inheritance. I’m going to use my juicer to illustrate how each
+                    of these concepts can be applied in a programming environment, since the juicer
+                    can be considered an object. It’s a wonderful machine that makes fresh juice for
+                    me every morning. In many ways, my juicer can be thought of as an object, as it
+                    has properties such as speed and capacity, and also has methods or actions it can
+                    perform, such as juicing, switching on and switching off.
+                </li>
+                <li>
+                    <h4>Encapsulation</h4>
+                    When I use my juicer, I put the fruit into the machine, press the 'on' button and
+                    out comes the juice. I haven’t a clue how it does it—only that it makes a very
+                    loud noise! This demonstrates the concept of encapsulation: the inner workings
+                    are kept hidden inside the object and only the essential functionalities are
+                    exposed to the end user, such as the 'on' button. In OOP, this involves keeping all
+                    the programming logic inside an object and making methods available to
+                    implement the functionality, without the outside world needing to know how it’s
+                    done.
+                    <h4>Polymorphism</h4>
+                    My juicer isn't the only appliance I own that has an 'on' button, although the way
+                    the on button works is slightly different for each appliance. My juicer also uses
+                    the same electrical outlet as other appliances in my kitchen. I can also place
+                    various types of fruit into it and it still juices them. These examples demonstrate
+                    the concept of polymorphism: the same process can be used for different objects.
+                    In OOP, this means various objects can share the same method, but also have the
+                    ability to override shared methods with a more specific implementation.
+                    <h4>Inheritance</h4>
+                    I’d really like the next model up from my juicer, as it can deal with more types
+                    of fruit and it’s a bit quieter. Even though it has these extra features, I’m sure that
+                    inside it uses many of the same parts that my juicer has. This demonstrates the
+                    concept of inheritance: taking the features of one object then adding some new
+                    features. In OOP, this means we can take an object that already exists and inherit
+                    all its properties and methods. We can then improve on its functionality by
+                    adding new properties and methods.
+                </li>
+                <li>
+                    <h4>JAVASCRIPT IS A PROTOTYPE-BASED LANGUAGE</h4>
+                </li>
+                <li>
+                    <h4>Creating an instantiable object</h4>
+                    <pre>
+                        class Dice {
+                            constructor(sides=6) {
+                                this.sides = sides;
+                            }
+                            roll() {
+                                return Math.floor(this.sides * Math.random() + 1)
+                            }
+                        }                            
+                    </pre>
+                </li>
+                <li>
+                    <p>new Array(5) returns an array of lenght 5 full of undefined items</p>
+                    <pre>
+                        new Array(5); // you might expect [5]
+                        << [undefined, undefined, undefined, undefined, undefined]
+                    </pre>
+                </li>
+                <li>
+                    <h4>The Constructor Property</h4>
+                    <pre>
+                        All objects have a constructor property that returns the constructor function
+                        that created it:
+
+                        blueDice.constructor
+                        << [Function: Dice]
+
+                        When an object literal is used to create a new object, we can see that in the
+                        background, the Object constructor function is being used:
+
+                        const literalObject = {};
+                        << {}
+                        literalObject.constructor
+                        << [Function: Object]
+
+                        All objects have a constructor property that returns the constructor function
+                        that created it:
+                        blueDice.constructor
+                        << [Function: Dice]
+                        When an object literal is used to create a new object, we can see that in the
+                        background, the Object constructor function is being used:
+                        const literalObject = {};
+                        << {}
+                        literalObject.constructor
+                        << [Function: Object]
+                    </pre>
+                </li>
+                <li>
+                    <h4>Static Methods</h4>
+                    <p>Static methods can only be called by the class, and not by their instances.</p>
+                </li>
+                <li>
+                    <h4>The prototype property</h4>
+                    <pre>
+                        All objects have a constructor property that returns the constructor function
+                        that created it:
+                        blueDice.constructor
+                        << [Function: Dice]
+                        When an object literal is used to create a new object, we can see that in the
+                        background, the Object constructor function is being used:
+                        const literalObject = {};
+                        << {}
+                        literalObject.constructor
+                        << [Function: Object]
+                    </pre>
+                </li>
+                <li>
+                    <h4>Advantage of private variables or methods</h4>
+                    <p>We can prevent them for being changed in any way, using getters and setters.</p>
+                </li>
+                <li>
+                    <h4>
+                        Inheritance
+                    </h4>
+                    <pre>
+                        A class can inherit from another class using the extends keyword in a class
+                        declaration.
+                        For example, say we decided to start again with our Turtle class as:
+                        class Turtle {
+                        constructor(name) {
+                        this.name = name;
+                        }
+                        sayHi() {
+                        return `Hi dude, my name is ${this.name}`;
+                        }
+                        swim() {
+                        return `${this.name} paddles in the water`;
+                        }
+                        }
+                        This class declaration is similar to before, and defines properties and methods
+                        for a normal turtle. In our previous example, we then started adding more
+                        specific properties such as weapons that don't really apply to normal turtles, they
+                        are for ninja turtles. Instead of polluting the Turtle class with these properties, it
+                        would be a good idea to create a sub-class or child class of the Turtle class called
+                        ninjaTurtle. This is created in a similar fashion, using a class declaration, but
+                        notice the use of the extends keyword:
+                        class NinjaTurtle extends Turtle {
+                        constructor(name) {
+                        super(name);
+                        this.weapon = 'hands';
+                        }
+                        attack() { return `Feel the power of my ${this.weapon}!` }
+                        }
+                        Inside the child class declaration, the keyword super refers to the parent class,
+                        and can be used to access any properties and call any methods of the parent
+                        class. In the example above we use it to call the constructor function of the
+                        Turtle class.
+                    </pre>
+                </li>
+                <li>
+                    <h4>Polymorphism</h4>
+                    <pre>
+                        The concept of polymorphism means that different objects can have the same
+                        method, but implement it in different ways. The Object.prototype object has a
+                        toString() method that is shared by all objects. This means every object
+                        created in JavaScript will have a toString() method. Polymorphism means that
+                        objects are able to override this method with a more specific implementation. So
+                        although every object has a toString() method, the way it’s implemented can
+                        vary between different objects. For example, calling it on an array object will
+                        return each value in a comma-separated string:
+                        [1,2,3].toString()
+                        << '1,2,3'
+                        Calling it on a primitive number will return a string containing that number:
+                        2..toString; // remember 2 dot operators for integers!
+                        << '2'
+                    </pre>
+                </li>
+                <li>
+                    <h4>Adding Methods to Built-in Objects</h4>
+                    <pre>
+                        Adding Methods to Built-in Objects
+                        It is possible to add more methods to the prototype of JavaScript’s built-in
+                        objects — such as Number, String, and Array — to add more functionality. This
+                        practice is known as monkey-patching, but it’s mostly frowned upon in the
+                        JavaScript community, despite it being an incredibly powerful technique (the
+                        Ruby programming community, on the other hand, generally embrace monkeypatching, so it is quite common in Ruby code examples).
+                        As an example, we can add isOdd() and isEven() methods to the Number
+                        wrapper object’s prototype. These methods will then be available to number
+                        primitives:
+                        Number.prototype.isEven = function() {
+                        return this%2 === 0;
+                        }
+                        Number.prototype.isOdd = function() {
+                        return this%2 === 1;
+                        }
+                        We can try a few more examples to check that these work:
+                        42.isEven();
+                        << true
+                        765234.isOdd();
+                        << false
+
+                        Arrays are powerful objects, but seem to have some basic methods missing in
+                        JavaScript that are found in other languages. We can add a first() and last()
+                        methods that return the first and last items in the array:
+                        Array.prototype.first = function() {
+                        return this[0];
+                        }
+                        Array.prototype.last = function() {
+                        return this[this.length -1];
+                        }
+                        Again, we can check that these work with a couple of examples:
+                        const turtles = ['Leonardo', 'Donatello', Michaelangelo', 'Raphael'];
+                        turtles.first();
+                        << 'Leonardo'
+                        turtles.last();
+                        << 'Raphael'
+
+                        An alternative way to avoid causing problems is to use extends to subclass a
+                        built class and create your own class. For example, you could create your own
+                        array class by extending the built in array class, like so:
+                        class myArray extends Array {
+                        constructor(...args){
+                        super(...args);
+                        }
+                        delete(i) {
+                        return this.splice(i,1);
+                        }
+                        }
+
+                    </pre>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h2>Modern JavaScript Development</h2>
+            <ul>
+                <li>
+                    <h4>Libraries</h4>
+                    <p>review</p>
+                </li>
+                <li>
+                    <h4>Modules</h4>
+                    <p>review</p>
+                </li>
+                <li>
+                    <h4>Frameworks</h4>
+                    <p>
+                        React and Vue.js both use the concept of a virtual DOM to speed up the process
+                        of updating HTML pages. Instead of directly changing the DOM, as we did in
+                        Chapter 6, a virtual DOM is updated in memory. The real DOM is only updated
+                        when it needs to be and this is done by comparing any differences between the
+                        virtual DOM and actual DOM and only updating those elements that have
+                        actually changed. This is a process known as reconciliation and it's what makes
+                        React and Vue extremely fast at rendering web pages
+                    </p>
+                </li>
+                <li>
+                    <h4>Content Delivery Networks</h4>
+                    <p>
+                        Content delivery networks (CDNs) are systems of distributed servers that can
+                        deliver web resources, such as JavaScript, CSS or image files to a user based on
+                        their geographic location. This means they’re able to deliver the content quickly
+                        and efficiently with a high degree of availability. These resources also get cached
+                        on the user's machine, meaning that less requests need to be made to download
+                        the resource. This is particularly beneficial when using a CDN for a popular
+                        library such as jQuery. This is because once the user has downloaded the file
+                        from a site, it will be cached, and can then be used again by other sites without
+                        the need for another network request.
+                    </p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

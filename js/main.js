@@ -1,4 +1,4 @@
-const links = [ 1, 2, 3 ]
+const links = [ 1, 2, 3, 4 ]
 
 for (link in links) {
     document.querySelector('body ol').innerHTML += `
