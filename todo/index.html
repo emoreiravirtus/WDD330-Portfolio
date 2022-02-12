@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <h1>Todos</h1>
+        <div>
+            <div class="todos-container">
+            </div>
+            <div id="todos-status">
+                <div id="tasks-left">0 tasks left</div>
+                <div id="all-filter-button" class="btn btn-active mx">All</div>
+                <div id="completed-filter-button" class="btn mx">Completed</div>
+            </div>
+        </div>
+        <div id="add-todo-container">
+            <input type="text" id="add-todo-input">
+            <div id="add-todo-button" class="btn bg-green  mx">Add task</div>
+        </div>
+    </div>
+</body>
+<script src="./todos.js" type="module"></script>
+</html>

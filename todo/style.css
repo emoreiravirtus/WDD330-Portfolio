@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400&display=swap');
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #fafafa;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    background: #fff;
+    padding: 30px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+    border-radius: 29px;
+}
+
+.todos-container {
+    padding: 10px;
+    border: 1px solid rgb(177 177 177 / 24%);
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.todo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+#todos-status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#add-todo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid rgb(177 177 177 / 24%);
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.btn {
+    padding: 10px;
+    border: 1px solid rgb(177 177 177 / 24%);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+    transition: transform .3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+.btn-active {
+    border: 2px solid rgb(36 36 36 / 35%);
+}
+
+.mx {
+    margin: 0 5px;
+}
+
+.bg-red {
+    background: #cd3535;
+    color: #fff;
+}
+
+.bg-green {
+    background: #2f912f;
+    color: #fff;
+}
+
+#todo-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #a3a3a3;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: center;
+    font-weight: 600;
+}
+
+#todo-name-input {
+    padding: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#todo-name:focus-visible {
+    outline: none;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+p {
+    margin: 0 20px;
+}
