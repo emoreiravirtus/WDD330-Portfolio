@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <h1>Week 7 Notes</h1>
+    <li>
+      We covered functions back in chapter 4, but we were only just beginning to
+      scratch the surface. In JavaScript, functions are first-class objects, which means
+      they can be passed around in the same way as every other value. They can have
+      their own properties and methods, as well as accepting other functions as
+      parameters and being returned by other functions. This makes them a very
+      flexible tool to work with in JavaScript, and there are a variety of techniques and
+      patterns that can be used to make code cleaner.
+    </li>
+    <li>
+      <h2>Function Properties and Methods</h2>
+      <p>
+        <pre>
+          The call() method can be used to set the value of this inside a function to an
+          object that is provided as the first argument.
+          In the following example, the sayHello() function refers to an unspecific object
+          called this that has a property called name:
+          function sayHello(){
+          return `Hello, my name is ${ this.name }`;
+          }
+          We can create some objects that have a name property, then use the call()
+          method to invoke the sayHello() function, providing each object as an
+          argument. This will then take the value of this in the function:
+          const clark = { name: 'Clark' };
+          const bruce = { name: 'Bruce' };
+          sayHello.call(clark);
+          << 'Hello, my name is Clarke'
+          sayHello.call(bruce);
+        </pre>
+        <pre>
+          The apply() method works in the same way, except the arguments of the
+function are provided as an array, even if there is only one argument:
+square.apply(null, [4])
+        </pre>
+        <h4>
+          These are two powerful methods, as they allow generalized functions to be
+written that are not tied to specific objects by being methods of that object. This
+gives flexibility over how the functions can be used.
+        </h4>
+      </p>
+      <h3>Custom Properties</h3>
+      <pre>
+        There is nothing to stop you adding your own properties to functions in the same
+way that you can add properties to any object in JavaScript. For example, you
+could add a description property to a function that describes what it does:
+square.description = 'Squares a number that is provided as an argument'
+<< 'Squares a number that is provided as an argument'
+      </pre>
+      <h3>Memoization</h3>
+      <p>
+        If a function takes some time to compute a return value, we can save the result in
+a cache property. Then if the same argument is used again later, we can return
+the value from the cache, rather than having to compute the result again.
+      </p>
+    </li>
+    <h2>Immediately Invoked Function Expressions</h2>
+     <pre>
+      An Immediately Invoked Function Expression – or IIFE – (pronounced 'iffy')
+      is an anonymous function that, as the name suggests, is invoked as soon as it’s
+      defined. This is easily achieved by placing parentheses at the end of the function
+      definition (remember we use parentheses to invoke a function). The function
+      also has to be made into an expression, which is done by placing the whole
+      declaration inside parentheses, as in this example:
+      (function(){
+      const temp = 'World';
+      console.log(`Hello ${temp}`);
+      })();
+      << 'Hello World'
+     </pre>
+     <h2>Temporary Variables</h2>
+     <pre>
+      let a = 1;
+      let b = 2;
+      (()=>{
+      const temp = a;
+      a = b;
+      b = temp;
+      })();
+      a;
+      << 2
+      b;
+      << 1
+      console.log(temp);
+      << Error: "temp is not defined
+     </pre>
+     <p>Swapping variables in ES</p>^
+     <code>
+      let [a,b] = [1,2];
+      [a,b] = [b,a];
+      a;
+      << 2
+      b;
+      << 1
+     </code>
+     <h3>Initialization code</h3>
+     <pre>
+        {
+        console.log('hey')
+        } 
+     </pre>
+     <li>
+       <h3>Safe Use of Strict Mode</h3>
+       <pre>
+          (function() {
+          'use strict';
+          // All your code would go inside this function
+          })();          
+       </pre>
+     </li>
+     <li>
+       <h1>Functions that define and rewrite themselves</h1>
+        <pre>
+            function party(){
+            console.log('Wow this is amazing!');
+            party = function(){
+            console.log('Been there, got the T-Shirt');
+            }
+            }
+        </pre>
+        <code>
+          party();
+          << 'Wow this is amazing!'
+          party();
+          << 'Been there, got the T-Shirt'
+          party();
+          << 'Been there, got the T-Shirt'
+        </code>
+     </li>
+     <li>
+       <h3>Init-Time Branching</h3>
+       <p>
+        This technique can be used with the feature detection that we discussed in the
+        last chapter to create functions that rewrite themselves, known as init-time
+        branching. This enables the functions to work more effectively in the browser,
+        and avoid checking for features every time they’re invoked.
+       </p>
+       <h4>This can be a useful pattern to initialize functions the first time they’re called,
+        optimizing them for the browser being used.
+        </h4>
+     </li>
+     <li>
+       <h3>Recursive functions</h3>
+       <pre>
+        A recursive function is one that invokes itself until a certain condition is met. It’s
+        a useful tool to use when iterative processes are involved. A common example is
+        a function that calculates the factorial of a number:
+        function factorial(n) {
+        if (n === 0) {
+        return 1;
+        } else {
+        return n * factorial(n - 1);
+        }
+       </pre>
+     </li>
+     <li>
+       <h3>Callback Hell</h3>
+       <a href="http://callbackhell.com/">callbackhell</a>
+       <pre>
+         <p>
+          This is the most important part:
+           Anyone is capable of creating modules (aka libraries). To quote Isaac
+            Schlueter (of the node.js project): "Write small modules that each do one thing, 
+            and assemble them into other modules that do a bigger thing. 
+            You can't get into callback hell if you don't go there."
+         </p>
+       </pre>
+     </li>
+     <li>
+       <h2>Promises</h2>
+       <p>
+        A promise represents the future result of an asynchronous operation. Promises
+        don't do anything that can't already be achieved using callbacks, but they help
+        simplify the process, and avoid the convoluted code that can result from using
+        multiple callbacks.
+       </p>
+       <p>
+        When a promise is created, it calls an asynchronous operation and is then said to
+        be pending. It remains in this state while the operation is taking place. At this
+        stage, the promise is said to be unsettled. Once the operation has completed, the
+        promise is said to have been settled. A settled promise can result in two different
+        outcomes:
+        Resolved ― the asynchronous operation was completed successfully.
+        Rejected ― the asynchronous operation didn`t work as expected, wasn't
+        successfully completed or resulted in an error.
+       </p>
+       <pre>
+          const promise = new Promise( (resolve, reject) => {
+          // initialization code goes here
+          if (success) {
+          resolve(value);
+          } else {
+          reject(error);
+          }
+          });
+       </pre>
+       <h3>Dealing with a settled promise</h3>
+       <code>
+        login(userName)
+        .then(user => getPlayerInfo(user.id))
+        .then(info => loadGame(info))
+        .catch( throw error)
+       </code>
+     </li>
+     <li>
+       <h3>Async Functions</h3>
+       <code>
+        async function loadGame(userName) {
+          try {
+          const user = await login(userName);
+          const info = await getPlayerInfo (user.id);
+          // load the game using the returned info
+          }
+          catch (error){
+          throw error;
+          }
+          }
+       </code>
+     </li>
+     <li>
+       <h3>
+        Generalized Functions
+       </h3>
+       <p>Swap two values using destructuring: [a,b] = [b,a];</p>
+       <code>
+          function random(a,b,callback) {
+          if (b === undefined) b = a, a = 1; // if only one argument is supplied, assume the lower limit is 1
+          const result = Math.floor((b-a+1) * Math.random()) + a
+          if(callback) {
+          result = callback(result);
+          }
+          return result;
+          }
+       </code>
+     </li>
+     <li>
+       <h3>
+         Functions that return functions
+       </h3>
+       <pre>
+          function returnHello() {
+          console.log('returnHello() called');
+          return function() {
+          console.log('Hello World!');
+          }
+          }          
+       </pre>
+       <pre>
+        When the returnHello() function is invoked, it logs a message to the console
+        then returns another function:
+        returnHello()
+        << returnHello() called
+        To make use of the function that is returned, we need to assign it to a variable:
+        const hello = returnHello();
+        << returnHello() called
+        Now we can invoke the 'Hello World' function by placing parentheses after the
+        variable that it was assigned to:
+        hello()
+        << Hello World!        
+       </pre>
+     </li>
+     <li>
+       <h3>Closures</h3>
+       <pre>
+        A closure is a reference to a variable that was created inside the scope of another
+        function, but is then kept alive and used in another part of the program.
+        One of the key principles in creating closures is that an 'inner' function, which is
+        declared inside another function, has full access to all of the variables declared
+        inside the scope of the function in which it’s declared (the 'outer' function). This
+        can be seen in the example below:
+        function outer() {
+        const outside = 'Outside!';
+        function inner() {
+        const inside = 'Inside!';
+        console.log(outside);
+        console.log(inside);
+        }
+        console.log(outside);
+        inner();
+        }        
+       </pre>
+       <pre>
+        As we saw in the example above, functions declared from within another
+        function have access to any variables declared in the outer function’s scope.
+        <b>A closure is formed when the inner function is returned by the outer function,
+        maintaining access to any variables declared inside the enclosing function.</b>
+        function outer() {
+        const outside = 'Outside!';
+        function inner() {
+        const inside = 'Inside!';
+        console.log(outside);
+        console.log(inside);
+        }
+        return inner;
+        }
+       </pre>
+       <pre>
+        We can now assign a variable to the return value of the outer() function:
+        const closure = outer();
+       </pre>
+       <h4>A closure is formed when a function returns another function that then maintains
+        access to any variables created in the original function’s scope.</h4>
+     </li>
+     <li>
+       <h2>Generators</h2>
+       <p>
+        These are special functions used to
+        produce iterators that maintain the state of a value.        
+       </p>
+       <pre>
+        To define a generator function, an asterisk symbol (*) is placed after the function
+        declaration, like so:
+        function* exampleGenerator() {
+        // code for the generator goes here
+        }        
+       </pre>
+       <pre>
+        function* fibonacci(a,b) {
+          let [ prev,current ] = [ a,b ];
+          while(true) {
+          [prev, current] = [current, prev + current];
+          yield current;
+          }
+          }          
+       </pre>
+     </li>
+     <li>
+       <h2>Functional Programming</h2>
+       <pre>
+        A key aspect of functional programming is its use of pure functions. A pure
+        function is a function that adheres to the following rules:
+        1) The return value of a pure function should only depend on the values provided
+        as arguments. It doesn't rely on values from somewhere else in the program.
+        2) There are no side-effects. A pure function doesn't change any values or data
+        elsewhere in the program. It only makes non-destructive data transformations
+        and returns new values, rather than altering any of the underlying data.
+        3) Referential transparency. Given the same arguments, a pure function will
+        always return the same result.
+       </pre>
+       <pre>
+        In order to follow these rules, any pure function must have:
+        At least one argument; otherwise the return value must depend on
+        something other than the arguments of the function, breaking the first rule
+        A return value; otherwise there’s no point in the function (unless it has
+        changed something else in the program – in which case, it’s broken the 'no
+        side-effects' rule).        
+       </pre>
+     </li>
+     <li>
+       <h3>Higher-Order Functions</h3>
+       <p>Higher-order functions are functions that accept another function as an
+        argument, or return another function as a result, or both.</p>
+        <p>
+          This
+means we can use it to build other, more specific functions by using different
+arguments.
+        </p>
+        <pre>
+        const elevado = n => {
+          return power => Math.pow(n, power);
+        }
+        
+        const doisElevadoA = elevado(2);
+        const tresElevadoA = elevado(3);
+        </pre>
+        <h4>trick</h4>
+        <pre>
+          When a higher-order function returns another function, we can use a neat trick to
+          create an anonymous return function and immediately invoke it with a value
+          instead by using double parentheses. The following example will calculate 3 to
+          the power 5:
+          power(3)(5);
+          << 243
+          This works because power(3) returns a function, to which we immediately pass
+          an argument of 5 by adding it in parentheses at the end.
+        </pre>
+     </li>
+     <li>
+       <h2>Currying</h2>
+       <p>
+        A function is said to be curried when not all arguments have been supplied to the
+        function, so it returns another function that retains the arguments already
+        provided, and expects the remaining arguments that were omitted when the
+        original function was called. A final result is only returned once all the expected
+        arguments have eventually been provided.
+       </p>
+     </li>
+  </ul>
+  <h1>Ajax</h1>
+  Ajax is a technique that allows web pages to communicate asynchronously with
+  a server, and it dynamically updates web pages without reloading. This enables
+  data to be sent and received in the background, as well as portions of a page to
+  be updated in response to user events, while the rest of the program continues to
+  run.
+  <ul>
+    <li>
+      <h2>Clients and servers</h2>
+      <pre>
+        The web of computers known as the internet can be separated into two parts:
+        clients and servers. A client, such as a web browser, will request a resource
+        (usually a web page) from a server, which processes the request and sends back a
+        response to the client.
+      </pre>
+      <ul>
+        <li>
+          <h3>Same-Origin Policy</h3>
+          <pre>
+            The same-origin policy in browsers blocks all requests from a domain that is
+            different from the page making the request. This policy is enforced by all
+            modern browsers and is to stop any malicious JavaScript being run from an
+            external source. The problem is that the APIs of many websites rely on data
+            being transferred across domains.
+          </pre>
+          <h3>CORS</h3>
+          <pre>
+            is a solution to this problem as it allows
+            resources to be requested from another website outside the original domain. The
+            CORS standard works by using HTTP headers to indicate which domains can
+            receive data. A website can have the necessary information in its headers to
+            allow external sites access to its API data. Most modern browsers support this
+            method and respect the restrictions specified in the headers.
+          </pre>
+        </li>
+        <li>
+          <h3>Asynchronous JavaScript and XML</h3>
+          <pre>
+            Asynchronous
+              When a request for data is sent, the program doesn’t have to stop and wait
+              for the response. It can carry on running, waiting for an event to fire when a
+              response is received. By using callbacks to manage this, programs are able
+              to run in an efficient way, avoiding lag as data is transferred back and forth.
+            JavaScript
+              JavaScript was always considered a 'front-end' language, not used to
+              communicate with the server. Ajax enabled JavaScript to send requests and
+              receive responses from a server, allowing content to be updated in real time.
+            XML
+              When the term Ajax was originally coined, XML documents were often
+              used to return data. Many different types of data can be sent, but by far the
+              most commonly used in Ajax nowadays is JSON, which is more
+              lightweight and easier to parse than XML. (Although it has never really
+              taken off, the term Ajaj is sometimes used to describe the technique.) JSON
+              also has the advantage of being natively supported in JavaScript, so you can
+              deal with JavaScript objects rather than having to parse XML files using
+              DOM methods.
+          </pre>
+        </li>
+        <li>
+          <h3>APIS</h3>
+          <pre>
+            An application programming interface (API) is a collection of methods that
+            allows external access to another program or service. Many websites allow
+            controlled access to their data via public APIs. This means that developers are
+            able to interact with the data and create mashups of third-party services. A
+            weather site, for example, might have an API that provides methods that return
+            information about the weather in a given location, such as temperature, wind
+            speed, and so on. This can then be used to display local weather data on a web
+            page. The information that’s returned by APIs is often serialized as JSON. Since
+            the data is being provided by an external site, CORS will have to be enabled in
+            order to access information from an API. Some services may also require
+            authentication in order to access their APIs.
+          </pre>
+          <h3>Fetch API</h3>
+          <code>
+            fetch('https://example.com/data')
+            .then( // code that handles the response )
+            .catch( // code that runs if the server returns an error
+          </code>
+          <h3>Creating Response Objects</h3>
+          <pre>
+              const response = new Response( 'Hello!', {
+              ok: true,
+              status: 200,
+              statusText: 'OK',
+              type: 'cors',
+              url: '/api'
+              });              
+          </pre>
+          <h3>HTTP verbs</h3>
+          <pre>
+            The five most commonly used verbs when dealing with resources on the web
+            are:
+            GET requests to retrieve resources
+            POST requests, usually used to create a resource but can actually perform
+            any task
+            PUT requests to upsert, which means insert a resource or update it entirely
+            PATCH requests to make partial updates to a resource
+            DELETE requests to delete a resources.
+          </pre>
+          <h3>Creating Request Objects</h3>
+          <pre>
+            const request = new Request('https://example.com/data', {
+              method: 'GET',
+              mode: 'cors',
+              redirect: 'follow',
+              cache: 'no-cache'
+              });              
+          </pre>
+          <pre>
+            fetch(request)
+            .then( // do something with the response )
+            .catch( // handle any errors)
+          </pre>
+          <h3>Creating Headers instances</h3>
+          <pre>
+            const headers = new Headers();            
+          </pre>
+          <pre>
+            fetch(request)
+            .then( // do something with the response )
+            .catch( // handle any errors)
+          </pre>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <h2>Sending data with Ajax</h2>
+      <pre>
+        const data = JSON.stringify(task);
+        const url = 'https://jsonplaceholder.typicode.com/todos';
+        const headers = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        });
+        const request = new Request(url,
+        {
+          method: 'POST',
+        header: headers,
+        body: data
+        }
+        )
+        fetch(request)
+        .then( response => response.json() )
+        .then( task => console.log(`Task saved with an id of ${task.id}`) )
+        .catch( error => console.log('There was an error:', error))
+        }
+      </pre>
+    </li>
+    <li>
+      <h2>Form data</h2>
+      <pre>
+        The Fetch API includes the FormData interface, which makes it much easier to
+        submit information in forms using Ajax.
+        A FormData instance is created using a constructor function:
+        const data = new FormData();
+      </pre>
+    </li>
+  </ul>
+</body>
+</html>
