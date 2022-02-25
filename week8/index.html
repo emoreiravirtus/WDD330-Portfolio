@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #circle {
+      width: 50px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid black;
+      animation: 2s rotate infinite;
+    }
+
+    .hover-me {
+      color: white;
+      background: black;
+      border-radius: 14px;
+      text-align: center;
+      padding: 10px;
+      transition: all 1s;
+    }
+
+    .hover-me:hover {
+      background-color: aquamarine;
+      color: black;
+    }
+
+    .origin-different {
+      transform-origin: 2% 2%;
+    }
+
+    canvas {
+      border: dotted 2px black;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .box {
+      width: 191.99px;
+      height: 191.99px;
+      background-color: black;
+    }
+
+    @keyframes rotate {
+      0% {transform: rotate(0deg)}
+      50% {transform: rotate(180deg)}
+      100% {transform: rotate(360deg)}
+    }
+  </style>
+</head>
+<body>
+  <h1>Week 8 Notes</h1>
+<ul>
+  <li>
+    <h2>Transforms</h2>
+    <p>The CSS3 transform property lets you lets you translate, rotate, scale, and/or skew
+      any element on the page. While some of these effects were possible using previously
+      existing CSS features (such as translating with relative and absolute positioning),
+      CSS3 gives you unprecedented control over many more aspects of the element’s
+      appearance.</p>
+    <ul>
+      <li>
+        <h3>Translations</h3>
+        <p>Review</p>
+        <h3>Scaling</h3>
+        <p>Review</p>
+        <h3>Rotation</h3>
+        <p>Review</p>
+        <h3>Skew</h3>
+        <p>Review</p>
+      </li>
+      <li>
+        <h3>Changing the Origin of the Transform</h3>
+        <p>Let’s say that you were transforming a circle. Because the default transform-origin
+          is the center of the circle, applying a rotate() transform to a circle would have no
+          visible effect—a circle rotated 90 degrees still looks exactly the same as it did before
+          being rotated. An ellipse rotated 180 degrees around its center would also look the
+          same as it did before being rotated upside down</p>
+        <p>Circle with normal transform</p>
+        <div id="circle"></div>
+        <br>
+        <p>Circle with transform-origin: 2% 2%;</p>
+        <div id="circle" class="origin-different"></div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <h2>Transitions</h2>
+    <pre>
+      Here are the steps to create a simple transition using only CSS:
+      1. Declare the original state of the element in the default style declaration.
+      2. Declare the final state of your transitioned element; for example, a :hover state.
+      3. Include the transition functions in your default style declaration using the
+      transition properties, including: transition-property, transition-duration,
+      transition-timing-function, and transition-delay. We’ll look at each of
+      these and how they work shortly
+    </pre>
+    <h3>transition-property</h3>
+    <p>
+      The transition-property property defines the CSS properties of the element that
+should be transitioned, with all for all properties being the default.
+    </p>
+    <h3>The transition-duration Property</h3>
+    <p>
+      The transition-duration property sets how long the transition will take: the
+duration of time it takes to go from the default state to the transitioned state.
+    </p>
+    <h3>The transition-timing-function Property</h3>
+    <p>
+      The transition-timing-function lets you control the pace of the transition in
+even more granular detail. Doyou wantyour animation tostartoff slow and become
+faster, start off fast and end slower, advance at an even keel, or some other variation?
+    </p>
+    <h3>The transition-delay Property</h3>
+    <p>
+      Finally, by using the transition-delay property, it’s possible to introduce a delay
+before the transition begins.
+    </p>
+    <h3>Multiple Transitions</h3>
+    <p>Review</p>
+    <div class="hover-me">
+      Hover me to show transition magic!!!
+    </div>
+  </li>
+  <li>
+    <h2>Animations</h2>
+    <pre>
+      Transitions animate elements over time; however, they’re limited in what they can
+      do. You can define starting and ending states, but there’s no fine-grained control
+      over any intermediate states. CSS animations, unlike transitions, allow you to
+      control each step of an animation via keyframes.
+    </pre>
+    <p>Many of it is just a review for me</p>
+  </li>
+  <li>
+    <h2>Canvas</h2>
+    <pre>
+      With HTML5’s Canvas API, we can draw anything we can imagine, all through
+      JavaScript. This can improve the performance of our websites by avoiding the need
+      to download images off the network. With canvas, we can draw shapes and lines,
+      arcs and text, gradients and patterns. In addition, canvas gives us the power to manipulate pixels in images and even video. We’ll start by introducing some of the
+      basic drawing features of canvas, but then move on to using its power to transform
+      our video—taking our modern-looking color video and converting it into conventional black and white to match the overall look and feel of The HTML5 Herald.
+    </pre>
+    <h3>
+      Filling Our Brush with Color
+    </h3>
+    <p>
+      On a real-life painting canvas, you must first saturate your brush with paint before
+      you can begin. In the HTML5 canvas, you must do the same, and we do so with the
+      strokeStyle or fillStyle properties. Both strokeStyle and fillStyle are set on
+      a context object, and both take one of three values: a string representing a color, a
+      CanvasGradient object, or a CanvasPattern object.
+    </p>
+    <p>
+      With more complex shapes, we need to take three steps:
+Canvas, SVG, and Drag and Drop 315
+layout the path, stroke the path, and fill the path.
+    </p>
+    <canvas width="200" height="200"></canvas>
+    <h3>
+      Manipulating Video with Canvas
+    </h3>
+    <p>
+      We can take the code we’ve already written to convert a color image to black and
+      white and enhance it to make our color video black and white, matching the oldCanvas, SVG, and Drag and Drop 327
+      timey feel of The HTML5 Herald page. We’ll do this in a new separate JavaScript
+      file called videoToBW.js, so that we can include it on the site’s home page.
+    </p>
+    <h3>
+      Manipulating Images
+    </h3>
+    <p>
+      Redrawing an image element from the page onto a canvas is fairly unexciting. It’s
+really no different from using an img element. Where it does become interesting is
+how we can manipulate an image after we’ve drawn it into the canvas.
+    </p>
+    <h3>Accessibility Concerns</h3>
+    <pre>
+      A major downside of canvas in its current form is its lack of accessibility. The canvas
+      doesn’t create a DOM node, is not a text-based format, and is thus essentially invisible to tools such as screen readers. For example, even though we wrote text to the
+      canvas in our last example, that text is essentially no more than a bunch of pixels
+      and is therefore inaccessible―it’s just like an image that contains text.
+      The HTML5 community is aware of these failings, and while no solution has been
+      finalized, debates on how canvas could be changed to make it accessible are underway. You can read a compilation of the arguments and currently proposed solutions
+      on the W3C’s wiki page.8
+    </pre>
+  </li>
+  <li>
+    <h2>SVG</h2>
+    <pre>
+      First, a quick refresher: SVG stands for Scalable Vector Graphics, a specific file
+      format that allows you to describe vector graphics using XML. A major selling point
+      of vector graphics in general is that, unlike bitmap images (such as GIF, JPEG, PNG,
+      and TIFF), vector images preserve their quality even as you blow them up or shrink
+      them down. We can use SVG to do many of the same tasks we can do with canvas,
+      including drawing paths, shapes, text, gradients, and patterns. There are also very
+      useful open-source tools relevant to SVG, some of which we’ll leverage in order to
+      add a spinning progress indicator to The HTML5 Herald’s geolocation widget.
+      Unlike canvas, images created with SVG are available via the DOM. This enables
+      technologies such as screen readers to see what’s present in an SVG object through
+      its DOM node, as well as allowingyou toinspect SVG usingyourbrowser’s developer
+      tools. Since SVG is an XML file format, it’s also more accessible to search engines
+      than canvas.
+    </pre>
+    <h3>Drawing in SVG</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 30">
+        <circle cx="20" cy="20" r="10" fill="red"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 30">
+          <desc>Drawing a rectangle</desc>
+          <rect x="10" y="10" width="30" height="30"
+          fill="blue" stroke="red" stroke-width="1" />
+         </svg>   
+    </pre>
+  </li>
+  <li>
+    <h2>Drag and Drop</h2>
+    <pre>
+      We’ve spent quite a bit of time this chapter focusing on drawing with code. Let’s
+      shift gears a little now and lookat an API we can use toadd some fun user interaction
+      to our website, the Drag and Drop API. This API allows us to specify that certain
+      elements are draggable, and then specify what should happen when these draggable
+      elements are dragged over or dropped onto other elements on the page.
+    </pre>
+    <pre>
+      There are several steps to adding drag and drop to your page:
+      1. Set the draggable attribute on any HTML elements you’d like to be draggable.
+      2. Add an event listener for the dragstart event on any draggable HTML elements.
+      3. Add an event listener for the dragover and drop events on any elements that you
+      want to have accept dropped items.
+    </pre>
+    <h2>Drag and drop the image on the  black box</h2>
+    <div class="flex">
+      <img src="./unnamed.png">
+      <div class="box"></div>
+    </div>
+    <h3>DataTransfer Object</h3>
+    <p>
+      DataTransferobjects areone typeofobjectoutlined in the Drag and Drop API. These
+      objects allow us to set and get data about the elements that are being dragged.
+    </p>
+  </li>
+</ul>
+</body>
+<script>
+  const canvas = document.querySelector('canvas');
+  const context = canvas.getContext('2d');
+  context.strokeStyle = 'red';
+  context.fillStyle = "rgba(0, 0, 255, 0.3)"; 
+  context.fillRect(10, 100, 100, 20);
+  context.strokeRect(0, 10, 20, 20);
+
+  var img = new Image();
+  img.src = "./unnamed.png";
+  img.onload = function() {
+    var pattern = context.createPattern(img, "no-repeat");
+    context.fillStyle = pattern;
+    context.fillRect(20, 10, 100, 100);
+  };
+
+  context.beginPath();
+  context.arc(150, 50, 30, 0, Math.PI*2, true);
+  context.closePath();
+  context.strokeStyle = "red";
+  context.fillStyle = "blue";
+  context.lineWidth = 3;  
+  context.fill();
+  context.stroke();
+
+
+  let seiya = document.querySelector('img');
+  let box = document.querySelector('.box');
+
+
+  seiya.addEventListener('dragstart', function (event) {
+    event.dataTransfer.setData("text/plain", seiya)
+  });
+
+  box.addEventListener("dragover", function(event) {
+    event.preventDefault();
+  });
+
+  box.addEventListener("drop", function(event) {
+    seiya.src = null;
+    box.style.backgroundImage = "url('./unnamed.png')";
+  });
+
+</script>
+</html>
