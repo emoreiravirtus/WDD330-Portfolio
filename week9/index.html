@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 9</title>
+</head>
+<body>
+  <h1>Chapter 9: The window object</h1>
+  <pre>
+    Every JavaScript environment has a global object. Any variables that are
+    created in the global scope are actually properties of this object, and any
+    functions are methods of it. In a browser environment the global object is the
+    window object, which represents the browser window that contains a web page.
+  </pre>
+  <ul>
+    <li>
+      <h2>The Browser Object Model</h2>
+      <pre>
+        The Browser Object Model (or BOM for short) is a collection of properties and
+        methods that contain information about the browser and computer screen. For
+        example, we can find out which browser is being used to view a page (though,
+        this method is unreliable). We can also find out the dimensions of the screen it is
+        viewed on, and which pages have been visited before the current page. It can
+        also be used for the rather dubious practice of creating pop-up windows, if
+        you’re into annoying your users.
+      </pre>
+    </li>
+    <li>
+      <h2>Going Global</h2>
+      <pre>
+        x = 6; // global variable created
+        << 6
+        window.x // same variable can be accessed as a property of the window object
+        << 6
+        // both variables are exactly the same
+        window.x === x;
+        << true
+      </pre>
+    </li>
+    <li>
+      <h2>About dialogs</h2>
+      <pre>
+        It’s worth reiterating again that these methods will stop the execution of a
+        program in its tracks. This means that everything will stop processing at the
+        point the method is called, until the user clicks 'OK' or 'Cancel'. This can cause
+        problems if the program needs to process something else at the same time or the
+        program is waiting for a callback function.
+        There are some occasions when this functionality can be used as an advantage,
+        for example, a window.confirm() dialog can be used as a final check to see if a
+        user wants to delete a resource. This will stop the program from going ahead and
+        deleting the resource while the user decides what to do.
+        It's also worth keeping in mind that most browsers allow users to disable any
+        dialogs from repeatedly appearing, meaning they are not a feature to be relied
+        upon.
+      </pre>
+    </li>
+    <li>
+      <h2>Browser?</h2>
+      <p id="whichBrowser" style="color: darkgreen"></p>
+      <h2>Location?</h2>
+      <p id="whichLocation" style="color: darkgreen"></p>
+      <h2>Protocol?</h2>
+      <p id="whichProtocol" style="color: darkgreen"></p>
+    </li>
+    <li>
+      <h2>Window History</h2>
+      <pre>
+        The window.history.length property shows how many pages have been visited
+        before arriving at the current page.
+        The window.history.go() method can be used to go to a specific page, where 0
+        is the current page:
+        window.history.go(1); // goes forward 1 page
+        window.history.go(0); // reloads the current page
+        window.history.go(-1); // goes back 1 page
+        There are also the window.history.forward() and window.history.back()
+        methods that can be used to navigate forwards and backwards by one page
+        respectively, just like using the browser’s forward and back buttons.
+      </pre>
+    </li>
+    <li>
+      <h2>Controlling windows</h2>
+      <button id="openPopUp">Open PopUp and see it close in 7 seconds</button>
+    </li>
+    <li>
+      <h2>Screen Information</h2>
+      <pre>
+        The window.screen object contains information about the screen the browser is
+        displayed on. You can find out the height and width of the screen in pixels using
+        the height and width properties respectively:
+      </pre>
+      <pre>
+        window.screen.height
+        << 1024
+        window.screen.width
+        << 1280
+      </pre>
+    </li>
+    <li>
+      <h2>The document Object</h2>
+      <p>The following h3 text was made dinamicaly by adding 3 + 3</p> 
+      &lt;h3&gt; &lt;script&gt;document.write(`Hello, my name is Elias, and 3 + 3 is ${(3 + 3)}`)&lt;/script&gt;&lt;/h3&gt;
+      <h3><script>document.write(`Hello, my name is Elias, and 3 + 3 is ${(3 + 3)}`)</script></h3>
+    </li>
+    <li>
+      <h2>Cookies</h2>
+      <pre>
+        Cookies are small files that are saved locally on a user’s computer. They were
+        invented by Netscape as a way of getting round HTTP being a stateless protocol.
+        This means that a browser does not remember anything from one request to
+        another. So every time a user visits a page, nothing about any previous visits is
+        remembered. Cookies can be used to sidestep this problem by storing
+        information that can then be retrieved between requests.
+      </pre>
+      <pre>
+        Creating Cookies
+        document.cookie = 'name=Superman';
+        << "name=Superman"
+      </pre>
+    </li>
+    <li>
+      <h2>SetTimeout, SetInterval</h2>
+      <p>Revision</p>
+      <h2>requestAnimationFrame</h2>
+      <pre>
+        This method of the window object works in much the same way as the
+        window.setInterval() method, although it has a number of improvements to
+        optimize its performance. These include making the most of the browser’s builtin graphics-handling capabilities, and not running the animation when the tab is
+        inactive, resulting in a much smoother performance
+      </pre>
+      <h3>Consider Using CSS Instead</h3>
+    </li>
+  </ul>
+  <h1>Chapter 14: HTML5 APIs</h1>
+  <ul>
+    <li>
+      <h2>The data- Attribute</h2>
+      <pre>
+        data-powers = 'flight superSpeed'
+        data-rating = '5'
+        data-dropdown
+        data-user = 'DAZ'
+        data-max-length = '32'
+      </pre>
+      <h3>Example</h3>
+      <pre>
+        &lt;div id='hero' data-powers='flight superSpeed'&gt;
+          Superman
+        &lt;/div&gt;          
+      </pre>
+      <pre>
+        const superman = document.getElementById('hero');
+        const powers = superman.dataset.powers;
+        << 'flight superSpeed'
+      </pre>
+    </li>
+    <li>
+      <h2>HTML5 Web Storage</h2>
+      <p>Revision</p>
+    </li>
+    <li>
+      <h2>Geolocation</h2>
+      <pre>
+        The Geolocation API is used to obtain the geographical position of the device.
+        This means it can be used to find the user’s exact location, then link to nearby
+        places or measure the speed at which the user is moving. This information can
+        then be used to filter data based on the user's location or speed and direction of
+        travel. An example of this might be a search function that returns results based
+        on your location. Because of privacy concerns, permission to use this has to be
+        granted by the user first.
+      </pre>
+      <h3>Your current geolocation</h3>
+      <p id="geoLocation"></p>
+    </li>
+    <li>
+      <h2>Web Workers</h2>
+      <pre>
+        We saw in earlier chapters that JavaScript is a single-threaded language,
+        meaning that only one process can run at one time. Web workers allow processes
+        to be run in the background, adding support for concurrency in JavaScript. The
+        idea is that any processes that could take a long time are carried out in the
+        background, so a website will continue to function without fear of the dreaded
+        'script has become unresponsive' message that occurs when a script runs for too
+        long
+      </pre>
+      <pre>
+        Chrome Support
+        At the time of writing, the Chrome browser won't let you run workers from local
+        files like this. A workaround is start Chrome using the --allow-file-accessfrom-files flag, or simply use a different browser for this example.
+        If you decide to use the --allow-file-access-from-files flag, make sure you
+        only use this for development, rather than for regular browsing.
+      </pre>
+      <pre>
+        Creating a new worker
+        const worker = new Worker('task.js');
+      </pre>
+    </li>
+    <li>
+      <h2>Websockets</h2>
+      <pre>
+        Websocket is a new protocol that allows two-way communication with a server –
+        also known as push messaging. This means that a connection is kept open and
+        responses are ‘pushed’ to the client as soon as they are received
+      </pre>
+      <pre>
+        const URL = 'wss://echo.websocket.org/';
+        const connection = new WebSocket(URL);
+      </pre>
+      <pre>
+        Notice that it starts 'wss://'
+        instead of 'https://' 
+        This is the secure protocol used by websockets instead of HTTP
+      </pre>
+      <pre>
+        When the code new WebSocket(URL) runs, it creates an instance of a WebSocket
+        object and tries to connect to the URL. When this is successful, it fires an event
+        called 'open'. This is one of a number of events that a WebSocket object can
+        emit. To deal with it, we can add an event handler to main.js:
+
+        connection.addEventListener('open', () => {
+        output('CONNECTED');
+        }, false);
+
+      </pre>
+      <pre>
+        connection.send(text);
+      </pre>
+      <pre>
+        The last line is an important one. This calls a method of the connection object
+        called send(). This sends the message to the URL that the websocket is
+        connected to. When this message is received, the server will process it and send
+        a response. The connection object waits for the response, and when it receives
+        one, a 'message' event is fired. The 'echo.websocket.org' server simply responds
+        with the same message, but any message could be processed in a variety of ways
+        before sending a response.
+        Let's create an event handler to deal with the response:
+        connection.addEventListener('message', (event) => {
+        output(`RESPONSE: ${event.data}`);
+        }, false);
+      </pre>
+      <pre>
+        There are a couple of other events that the connection object responds to that
+        are worth knowing about: The close event occurs when the connection is
+        closed, which can be done using the close() method. The error event is fired
+        when any sort of error occurs with the connection. The information about the
+        error can be accessed in the data property of the event object.
+        Typical event listeners for these events might looks like the ones below:
+        connection.addEventListener('close', () => {
+        output('DISCONNECTED');
+        }, false);
+        connection.addEventListener('error', (event) => {
+        output(`ERROR: ${event.data}`);
+        }, false);
+      </pre>
+    </li>
+    <li>
+      <h2>Notification</h2>
+      <pre>
+        if(window.Notification) {
+          Notification.requestPermission()
+          .then((permission) => {
+          if(Notification.permission === 'granted') {
+          new Notification('Hello JavaScript!');
+          }
+          });
+          }
+      </pre>
+      <script>
+        if(window.Notification) {
+          Notification.requestPermission()
+          .then((permission) => {
+          if(Notification.permission === 'granted') {
+          new Notification('Hello JavaScript!');
+          }
+          });
+        }
+      </script>
+    </li>
+    <li>
+      <h2>Multimedia</h2>
+      <p>Revision</p>
+    </li>
+    <li>
+      <h2>Shims and Polyfills</h2>
+      <pre>
+        HTML5 APIs progress at a rapid rate ― new APIs are constantly being
+        introduced, and existing APIs often change. Modern browsers are very quick to
+        update and implement many of the changes, but you can’t always guarantee that
+        users will have the most up-to-date browser. This is where a shim or a polyfill
+        comes in handy. These are libraries of code that allow you to use the APIs as
+        usual. They then fill in the necessary code that's not provided natively by the
+        user’s browser.
+      </pre>
+      <pre>
+        The terms shim and polyfill are often used interchangeably. The main difference
+        between them is that a shim is a piece of code that adds some missing
+        functionality to a browser, although the implementation method may differ
+        slightly from the standard API. A polyfill is a shim that achieves the same
+        functionality, while also using the API commands that would be used if the
+        feature was supported natively.
+      </pre>
+    </li>
+  </ul>
+</body>
+<script>
+  let whichDocument = document.querySelector('#whichBrowser');
+  whichDocument.innerHTML = window.navigator.userAgent;
+  let whichLocation = document.querySelector('#whichLocation');
+  whichLocation.innerHTML = window.location.href;
+  let whichProtocol = document.querySelector('#whichProtocol');
+  whichProtocol.innerHTML = window.location.protocol;
+  let geoLocation = document.querySelector('#geoLocation');
+  function youAreHere(position) {
+    geoLocation.innerHTML = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+  };
+  navigator.geolocation.getCurrentPosition(youAreHere);
+
+  let popUpButton = document.querySelector('#openPopUp');
+
+  let popup;
+
+  popUpButton.addEventListener('click', () => {
+    popup = window.open('https://zen.ly/','Elias Test','width=400,height=600,resizable=yes');
+
+    setTimeout(() => {
+      popup.close();
+    }, 7000);
+  })
+</script>
+</html>
