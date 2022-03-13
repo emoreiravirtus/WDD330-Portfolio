@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 10</title>
+</head>
+<body>
+  <h1>Week 10 Notes</h1>
+  <ul>
+    <h2>MDN: Validating forms</h2>
+    <pre>
+      Before submitting data to the server,
+      it is important to ensure all required
+      form controls are filled out, in the correct format.
+      This is called client-side form validation,
+      and helps ensure data submitted matches the
+      requirements set forth in the various form controls.
+    </pre>
+    <li>
+      <h3>Different types of client-side validation</h3>
+      <p>
+        <b>Built-in form validation</b> uses HTML5 form validation features, which we've discussed in many places throughout this module. This validation generally doesn't require much JavaScript. Built-in form validation has better performance than JavaScript, but it is not as customizable as JavaScript validation.
+
+        <b>JavaScript validation</b>  is coded using JavaScript. This validation is completely customizable, but you need to create it all (or use a library).
+      </p>
+    </li>
+    <li>
+      <h3>Using built-in form validation</h3>
+      <p>
+        required: Specifies whether a form field needs to be filled in before the form can be submitted.
+      </p>
+      <p>
+        minlength and maxlength: Specifies the minimum and maximum length of textual data (strings)
+      </p>
+      <p>
+        pattern: Specifies a regular expression that defines a pattern the entered data needs to follow.
+      </p>
+    </li>
+    <li>
+      <h3>The Constraint Validation API</h3>
+      <pre>
+        Most browsers support the Constraint Validation API,
+        which consists of a set of methods and properties
+        available on the following form element DOM interfaces:
+      </pre>
+      <p>
+        HTMLButtonElement (represents a button element)
+      </p>
+      <p>
+        validationMessage: Returns a localized message describing the validation constraints that the control doesn't satisfy (if any). If the control is not a candidate for constraint validation (willValidate is false) or the element's value satisfies its constraints (is valid), this will return an empty string.
+      </p>
+      <p>
+        checkValidity(): Returns true if the element's value has no validity problems; false otherwise. If the element is invalid, this method also fires an invalid event on the element.
+      </p>
+    </li>
+  </ul>
+  <hr>
+  <ul>
+    <h2>MDN: Using Fetch</h2>
+    <pre>
+      The Fetch API provides a JavaScript interface
+      for accessing and manipulating parts of the HTTP pipeline,
+      such as requests and responses. It also provides a global fetch()
+      method that provides an easy, logical way to fetch resources
+      asynchronously across the network.
+    </pre>
+    <li>
+      <pre>
+        fetch('http://example.com/movies.json')
+          .then(response => response.json())
+          .then(data => console.log(data));
+      </pre>
+    </li>
+    <li>
+      <h3>Sending a request with credentials included</h3>
+      <pre>
+        fetch('https://example.com', {
+          credentials: 'include'
+        });
+      </pre>
+    </li>
+    <li>
+      <h3>Uploading JSON data</h3>
+      <pre>
+        const data = { username: 'example' };
+
+        fetch('https://example.com/profile', {
+          method: 'POST', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      </pre>
+    </li>
+    <li>
+      <h3>Uploading a file</h3>
+      <p>Files can be uploaded using an HTML input element, FormData() and fetch().</p>
+      <pre>
+        const formData = new FormData();
+        const fileField = document.querySelector('input[type="file"]');
+
+        formData.append('username', 'abc123');
+        formData.append('avatar', fileField.files[0]);
+
+        fetch('https://example.com/profile/avatar', {
+          method: 'PUT',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+          console.log('Success:', result);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      </pre>
+    </li>
+    <li>
+      <h3>Uploading multiple files</h3>
+      <p>Files can be uploaded using an HTML input element, FormData() and fetch().</p>
+      <pre>
+        const formData = new FormData();
+        const photos = document.querySelector('input[type="file"][multiple]');
+
+        formData.append('title', 'My Vegas Vacation');
+        for (let i = 0; i < photos.files.length; i++) {
+          formData.append(`photos_${i}`, photos.files[i]);
+        }
+
+        fetch('https://example.com/posts', {
+          method: 'POST',
+          body: formData,
+        })
+        .then(response => response.json())
+        .then(result => {
+          console.log('Success:', result);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      </pre>
+    </li>
+    <li>
+      Response Objects
+      <p>
+        As you have seen above, Response instances are returned when fetch() promises are resolved.
+      </p>
+      <pre>
+        const myBody = new Blob();
+
+        addEventListener('fetch', function(event) {
+          // ServiceWorker intercepting a fetch
+          event.respondWith(
+            new Response(myBody, {
+              headers: { 'Content-Type': 'text/plain' }
+            })
+          );
+        });
+      </pre>
+    </li>
+  </ul>
+</body>
+</html>
